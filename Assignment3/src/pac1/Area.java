@@ -14,23 +14,23 @@ static Scanner sc=new Scanner(System.in);
         case 1:
         	double width = input("width");
         	double height = input("height");
-        	System.out.println("Area of triangle is"+(0.5 * width * height));
+        	System.out.println("Area of triangle is "+(0.5 * width * height));
         	break;
         	//case 2 for rectangle
         case 2:
         	double width1 = input("width");
         	double height2 = input("height");
-        	System.out.println("Area of rectangle is"+(width1 * height2));
+        	System.out.println("Area of rectangle is "+(width1 * height2));
         	break;
         	//case 3 for square
         case 3:        	
         	double width3 = input("width");
-        	System.out.println("Area of square is"+(Math.sqrt(width3)));
+        	System.out.println("Area of square is "+(width3 * width3));
         	break;
         	//case 3 for circle
         case 4:
         	double radius = input("radius");
-        	System.out.println("Area of circle is"+(3.14 * radius * radius));
+        	System.out.println("Area of circle is "+(3.14 * radius * radius));
         	break;
         default:
         	System.out.println("Enter valid input");
