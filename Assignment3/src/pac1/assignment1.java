@@ -4,95 +4,131 @@ import java.util.Scanner;
 
 public class assignment1 {
 	//first scanner class for taking int value
-static Scanner sc=new Scanner(System.in);
+static Scanner scannerObjectNumber=new Scanner(System.in);
 
 //second scanner class for taking string value
-static Scanner sc1=new Scanner(System.in);
+static Scanner scannerObjectString=new Scanner(System.in);
+
+//global string variables
+static String firstString,secondString;
+
+static boolean isValid=true;
+
 	public static void main(String[] args) {
-		//using try-catch block to handle exceptions
-		try {
-System.out.println("Select option\n"
-+"1.Compare two strings\n"+"2.Reverse a string\n"
-+"3.Flip cases of a string\n"+"4.Find largest word of a string");
-int input=sc.nextInt();
-switch(input) {
-//first case for comparing 2 strings
-case 1:
-	String s1=input();
-	String s2=input();
-	System.out.println(comp(s1, s2));
-	break;
-//second case to reverse a string
-case 2:
-	String s3=input();
-	System.out.println("Reversed string is "+reverse(s3));
-	break;
-//third case to flip cases of a string
-case 3:
-	String s4=input();
-	System.out.println("New string is "+flip(s4));
-	break;
-//fourth case to find largest word in a string
-case 4:
-	String s5=input();
-	System.out.println("Largest string is "+largest(s5));
-	break;
-//default cases to handle edge cases
-default:
-	System.out.println("Please enter valid input");
-}
+		
+		while(isValid) {
+			//using try-catch block to handle exceptions
+			try {
+	System.out.println("Select option\n"
+	+"1.Compare two strings\n"+"2.Reverse a string\n"
+	+"3.Flip cases of a string\n"+"4.Find largest word of a string\n"
+	+"5.Exit");
+
+	int input=scannerObjectNumber.nextInt();
+	switch(input) {
+
+	//first case for comparing 2 strings
+	case 1:
+		firstString=inputFromUser();
+		secondString=inputFromUser();
+		System.out.println(compareString(firstString, secondString));
+		break;
+		
+	//second case to reverse a string
+	case 2:
+		firstString=inputFromUser();
+		System.out.println("Reversed string is "+reverseString(firstString));
+		break;
+		
+	//third case to flip cases of a string
+	case 3:
+		firstString=inputFromUser();
+		System.out.println("New string is "+flipCases(firstString));
+		break;
+		
+	//fourth case to find largest word in a string
+	case 4:
+		firstString=inputFromUser();
+		System.out.println("Largest string is "+largestWord(firstString));
+		break;
+		
+	//fifth case for terminating program	
+	case 5:
+		System.out.println("Program ended successfully");
+		isValid=false;
+		break;
+		
+	//default cases to handle edge cases
+	default:
+		System.out.println("Please enter valid input");
+	}
+			}
+			catch(Exception e) {
+				System.out.println("Please enter valid input");
+				scannerObjectNumber.nextLine();
+			}
 		}
-		catch(Exception e) {
-			System.out.println("Please enter valid input");
-		}
+		
 	}
 	
 	//taking string as input from user
-	static String input() {
+	static String inputFromUser() {
 		System.out.println("Enter a string");
-		String a=sc1.nextLine();
-		return a;	  
+		String inputString=scannerObjectString.nextLine();
+		return inputString;	  
 	}
 	
 	//compare two strings
-	static int comp(String a, String b) {
-		if(a.equals(b))return 1;
+	static int compareString(String firstInputString, String secondInputString) {
+		int firstInputStringIndex=0;
+		int secondInputStringIndex=0;
+		while(firstInputStringIndex<firstInputString.length() && secondInputStringIndex<secondInputString.length()){
+			if(firstInputString.charAt(firstInputStringIndex)==secondInputString.charAt(secondInputStringIndex)) {}
+			else return 0;
+			firstInputStringIndex++;
+		    secondInputStringIndex++;
+		}
+		
+		if(firstInputStringIndex==firstInputString.length() && secondInputStringIndex==secondInputString.length()) {
+			return 1;
+		}
 		else return 0;
 	}
 	
 	//reverse a string
-	static String reverse(String a) {
-		String ans="";
-		for(int i=a.length()-1;i>=0;i--) {
-			ans+=a.charAt(i);
+	static String reverseString(String inputString) {
+		String reversedString="";
+		for(int inputStringIndex=inputString.length()-1;inputStringIndex>=0;inputStringIndex--) {
+			reversedString+=inputString.charAt(inputStringIndex);
 		}
-		return ans;
+		return reversedString;
 	}
 	
 	//flip lowercase letters to uppercase and vice-verse
-	static String flip(String a) {
-		String ans="";
-		for(int i=0;i<a.length();i++) {
-			if(a.charAt(i)>=97 && a.charAt(i)<=122) {
-				char ch=(char)(a.charAt(i)-32);
-				ans+=ch;
+	static String flipCases(String inputString) {
+		String ansString="";
+		char stringCharacter;
+		for(int inputStringInde=0;inputStringInde<inputString.length();inputStringInde++) {
+			if(inputString.charAt(inputStringInde)>=97 && inputString.charAt(inputStringInde)<=122) {
+				stringCharacter=(char)(inputString.charAt(inputStringInde)-32);
+				ansString+=stringCharacter;
 			}
-			else if(a.charAt(i)>=65 && a.charAt(i)<=90) {
-				char ch=(char)(a.charAt(i)+32);
-				ans+=ch;
+			else if(inputString.charAt(inputStringInde)>=65 && inputString.charAt(inputStringInde)<=90) {
+				stringCharacter=(char)(inputString.charAt(inputStringInde)+32);
+				ansString+=stringCharacter;
 			}
-			else ans+=a.charAt(i);
+			else ansString+=inputString.charAt(inputStringInde);
 		}
-		return ans;
+		return ansString;
 	}
 	
 	//find largest word in a string and return it
-	static String largest(String a) {
-		String ans[]=a.split(" ");
-		String max="";
-		for(int i=0;i<ans.length;i++) {
-			if(ans[i].length()>max.length())max=ans[i];
+	static String largestWord(String inputString) {
+		String stringArray[]=inputString.split(" ");
+		String largestWord="";
+		for(int stringArrayIndex=0;stringArrayIndex<stringArray.length;stringArrayIndex++) {
+			if(stringArray[stringArrayIndex].length()>largestWord.length())largestWord=stringArray[stringArrayIndex];
 		}
-		return max;
+		return largestWord;
 	}
 }
